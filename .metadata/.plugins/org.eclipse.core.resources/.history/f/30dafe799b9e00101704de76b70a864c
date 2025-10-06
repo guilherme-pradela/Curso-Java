@@ -1,0 +1,35 @@
+package application;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import db.DB;
+
+public class Program {
+
+	public static void main(String[] args) {
+
+		Connection conn = null;
+		PreparedStatement st = null;
+		try {
+			conn = DB.getConnerction();
+			
+			st = conn.createStatement();
+			
+			int rows1 = st.executeUpdate("UPDATE seller SET BaseSalary = 2090 WHERE DepartmentId = 1");
+			
+			int rows2 = st.executeUpdate("UPDATE seller SET BaseSalary = 3090 WHERE DepartmentId = 1");
+
+			
+		}
+		catch (SQLException e) {
+           e.printStackTrace();
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeConnerction();
+		}
+	}
+
+}
